@@ -5,7 +5,7 @@ exports.up = function (knex) {
       table.string("entry").notNullable();
       table.timestamp("date_submitted").defaultTo(knex.fn.now());
     })
-    .createTable("template", (table) => {
+    .createTable("templates", (table) => {
       table.increments("id").primary();
       table.string("type");
       table.string("content");
