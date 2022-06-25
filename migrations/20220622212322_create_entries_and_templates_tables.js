@@ -1,25 +1,13 @@
 exports.up = function (knex) {
-  return knex.schema
-    .createTable("entries", (table) => {
-      table.increments("id").primary();
-      table.string("entry").notNullable();
-      table.timestamp("date_submitted").defaultTo(knex.fn.now());
-    })
-    .createTable("templates", (table) => {
-      table.increments("id").primary();
-      table.string("type");
-      table.string("content");
-      table
-        .integer("entries_id")
-        .unsigned()
-        .notNullable()
-        .references("id")
-        .inTable("entries")
-        .onUpdate("CASCADE")
-        .onDelete("CASCADE");
-    });
+  return knex.schema.createTable("entries", (table) => {
+    table.increments("id").primary();
+    table.string("content").notNullable();
+    table.string("type");
+    table.timestamp("date_created").defaultTo(knex.fn.now());
+    table.boolean("is_template").defaultTo(0).notNullable();
+  });
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTable("entries").dropTable("template");
+  return knex.schema.dropTable("entries");
 };

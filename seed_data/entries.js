@@ -1,10 +1,14 @@
 module.exports = [
   {
     id: 1,
-    entry: "Today I went to the beach. It was nice",
+    content: "Today I went to the beach. It was nice",
+    type: "Daily Entry",
+    is_template: false,
   },
   {
     id: 2,
-    entry: "Hello world. What a wonderful day",
+    content: "Hello world. What a wonderful day",
+    type: "Daily Entry",
+    is_template: true,
   },
 ];
