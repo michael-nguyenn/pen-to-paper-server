@@ -28,15 +28,15 @@ exports.singleEntry = (req, res) => {
 };
 
 exports.addEntry = (req, res) => {
-  !req.body.entry
-    ? res.status(400).send("Please fill out the entry")
-    : knex("entries")
-        .insert(req.body)
-        .then((data) => {
-          const newEntryURL = `/entries/${data[0]}`;
-          res.status(201).location(newEntryURL).send(newEntryURL);
-        })
-        .catch((err) => res.status(400).send(`Error creating Entry: ${err}`));
+  // !req.body.entry
+  //   ? res.status(400).send("Please fill out the entry") :
+  knex("entries")
+    .insert(req.body)
+    .then((data) => {
+      const newEntryURL = `/entries/${data[0]}`;
+      res.status(201).location(newEntryURL).send(newEntryURL);
+    })
+    .catch((err) => res.status(400).send(`Error creating Entry: ${err}`));
 };
 
 exports.deleteEntry = (req, res) => {
