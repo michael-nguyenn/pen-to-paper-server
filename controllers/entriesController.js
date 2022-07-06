@@ -23,7 +23,7 @@ exports.singleEntry = (req, res) => {
       res.status(200).json(data[0]);
     })
     .catch((err) =>
-      res.status(400).send(`Error retrieving warehouse ${req.params.id} ${err}`)
+      res.status(400).send(`Error retrieving entry ${req.params.id} ${err}`)
     );
 };
 
@@ -52,19 +52,17 @@ exports.deleteEntry = (req, res) => {
 };
 
 exports.updateEntry = (req, res) => {
-  !req.body.entry
-    ? res.status(400).send("Please fill out the entry")
-    : knex("entries")
-        .update(req.body)
-        .where({ id: req.params.id })
-        .then(() => {
-          res
-            .status(200)
-            .send(`Warehouse with id: ${req.params.id} has been updated`);
-        })
-        .catch((err) =>
-          res
-            .status(400)
-            .send(`Error updated Warehouse ${req.params.id} ${err}`)
-        );
+  // !req.body.entry
+  //   ? res.status(400).send("Please fill out the entry")
+  knex("entries")
+    .update(req.body)
+    .where({ id: req.params.id })
+    .then(() => {
+      res
+        .status(200)
+        .send(`Warehouse with id: ${req.params.id} has been updated`);
+    })
+    .catch((err) =>
+      res.status(400).send(`Error updated Warehouse ${req.params.id} ${err}`)
+    );
 };
